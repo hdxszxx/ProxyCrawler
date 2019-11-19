@@ -1,5 +1,7 @@
 package com.zxx.proxycrawler;
 
+import cn.hutool.http.HttpUtil;
+
 /**
  * 启动类
  *
@@ -8,4 +10,6 @@ package com.zxx.proxycrawler;
  * @date 2019/11/19 18:27
  */
 public class App {
+    public static void main(String[] args) {
+    }
 }
