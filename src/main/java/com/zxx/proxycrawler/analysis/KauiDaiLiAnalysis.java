@@ -1,11 +1,14 @@
 package com.zxx.proxycrawler.analysis;
 
-import cn.hutool.core.date.DateUtil;
+import com.zxx.proxycrawler.check.CheckProxy;
 import com.zxx.proxycrawler.entity.Proxy;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * 快代理解析
@@ -30,9 +33,10 @@ public class KauiDaiLiAnalysis {
     /**
      * 解析快代理
      */
-    public static void parse(String html){
+    public static  Set<Proxy> parse(String html){
         Document document = Jsoup.parse(html);
         Elements elements = document.select("#list tbody tr");
+        Set<Proxy> proxies = new HashSet<Proxy>();
         for (Element element:elements) {
             Proxy proxy = new Proxy();
             proxy.setIp(element.select("td[data-title=\"IP\"]").html());
@@ -42,7 +46,11 @@ public class KauiDaiLiAnalysis {
             proxy.setCountry(element.select("td[data-title=\"位置\"]").html());
             proxy.setSpeed(element.select("td[data-title=\"响应速度\"]").html());
             proxy.setEndTime(element.select("td[data-title=\"最后验证时间\"]").html());
+            //开始检查是否可以用
+            CheckProxy.start(proxy);
+            proxies.add(proxy);
         }
+        return proxies;
     }
 
 }

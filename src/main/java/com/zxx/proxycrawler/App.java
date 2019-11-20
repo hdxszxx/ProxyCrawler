@@ -1,6 +1,8 @@
 package com.zxx.proxycrawler;
 
-import cn.hutool.http.HttpUtil;
+import com.zxx.proxycrawler.thread.ProxyCreawler;
+
+import java.io.IOException;
 
 /**
  * 启动类
@@ -10,6 +12,9 @@ import cn.hutool.http.HttpUtil;
  * @date 2019/11/19 18:27
  */
 public class App {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+        //开始爬取
+       new ProxyCreawler().startCrawl();
+
     }
 }

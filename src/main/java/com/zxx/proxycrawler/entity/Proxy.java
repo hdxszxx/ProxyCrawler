@@ -1,10 +1,10 @@
 package com.zxx.proxycrawler.entity;
 
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * 代理实体类
@@ -14,7 +14,6 @@ import java.io.Serializable;
  * @date 2019/11/19 20:45
  */
 @Data
-@EqualsAndHashCode
 @ToString
 public class Proxy implements Serializable {
     /**
@@ -51,4 +50,18 @@ public class Proxy implements Serializable {
      * 最后验证时间
      */
     private String endTime;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {return true;}
+        if (o == null || getClass() != o.getClass()) {return false;}
+        Proxy proxy = (Proxy) o;
+        return Objects.equals(ip, proxy.ip) &&
+                Objects.equals(port, proxy.port);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(ip, port);
+    }
 }
